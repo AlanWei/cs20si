@@ -16,8 +16,13 @@ addN = tf.add_n([1, 2, 3])
 
 my_const = tf.constant([1.0, 2.0], name="my_const")
 
+test = tf.zeros([3])
+placeholder = tf.placeholder(tf.float32, shape=[3], name=None)
+
+operation = test + placeholder
+
 with tf.Session() as sess:
   # writer = tf.summary.FileWriter('./graphs', sess.graph)
-  print sess.run(addN)
+  print sess.run(operation, feed_dict={placeholder: [1, 2, 3]})
 
 # writer.close()

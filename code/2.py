@@ -5,9 +5,19 @@ b = tf.constant(5, name="b")
 
 x = tf.add(a, b, name="add")
 
-with tf.Session() as sess:
-  writer = tf.summary.FileWriter('./graphs', sess.graph)
-  print sess.run(x)
-  print sess.run(tf.zeros([1, 2])), sess.run(tf.ones([2, 2]))
+zeros = tf.zeros([2, 2])
+ones = tf.ones([2, 2])
+fill = tf.fill([2, 2], 8)
+# n number with equal distance between start and end
+linspace = tf.linspace(10.0, 13.0, 5)
+# exclude end
+ran = tf.range(1, 5, 1)
+addN = tf.add_n([1, 2, 3])
 
-writer.close()
+my_const = tf.constant([1.0, 2.0], name="my_const")
+
+with tf.Session() as sess:
+  # writer = tf.summary.FileWriter('./graphs', sess.graph)
+  print sess.run(addN)
+
+# writer.close()

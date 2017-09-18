@@ -32,6 +32,7 @@ init = tf.global_variables_initializer()
 
 with tf.Session() as sess:
   sess.run(init)
+  writer = tf.summary.FileWriter('./graphs/03/linear_reg', sess.graph)
 
   for i in range(training_patches):
     for (x, y) in zip(train_x, train_y):

@@ -18,7 +18,8 @@ pred = tf.add(tf.multiply(X, W), b)
 
 size = len(dataset)
 
-cost = tf.reduce_sum(tf.pow(Y-pred, 2))/size
+cost = tf.reduce_sum(tf.sqrt(tf.square(Y-pred) + 1) - 1)
+square_cost = tf.reduce_sum(tf.pow(Y-pred, 2))/size
 
 learing_rate = 0.1
 training_patches = 500
@@ -43,7 +44,9 @@ with tf.Session() as sess:
   print("Optimization Finished!")
   print("Y=", sess.run(W), "*X+", sess.run(b))
   cost_value = sess.run(cost, feed_dict={X: train_x, Y: train_y})
+  square_cost_value = sess.run(square_cost, feed_dict={X: train_x, Y: train_y})
   print("Modal cost is:", cost_value)
+  print("Modal square cost is:", square_cost_value)
 
   plt.plot(train_x, train_y, 'ro', label='Original data')
   plt.plot(train_x, sess.run(W) * train_x + sess.run(b), label='Fitted line')
